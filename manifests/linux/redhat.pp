@@ -79,10 +79,10 @@ class firewall::linux::redhat (
 
   # Before puppet 4, the autobefore on the firewall type does not work - therefore
   # we need to keep this workaround here
-  #if versioncmp($::puppetversion, '4.0') <= 0 {
+  if versioncmp($::puppetversion, '4.0') <= 0 {
     File["/etc/sysconfig/${service_name}"]    -> Service[$service_name]
     File["/etc/sysconfig/${service_name_v6}"] -> Service[$service_name_v6]
-  #}
+  }
 
   # Redhat 7 selinux user context for /etc/sysconfig/iptables is set to unconfined_u
   # Redhat 7 selinux type context for /etc/sysconfig/iptables is set to etc_t
